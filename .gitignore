@@ -1,0 +1,63 @@
+# Fichiers de données générées
+*.db
+*.sqlite
+*.csv
+
+# Fichiers de sortie
+output/
+visualizations/
+
+# Logs
+*.log
+pipeline.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environnements virtuels
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Configuration locale
+.env
+credentials.json
+
+# Cache
+.cache/
+.pytest_cache/
+
+# Fichiers temporaires
+*.tmp
+*.temp
+.tmp/
