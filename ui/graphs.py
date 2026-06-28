@@ -47,11 +47,24 @@ def render_polar_radar(
         custom_data_list.append(str(row['icao24']))
         
         callsign: str = str(row['callsign']).strip()
-        text_labels.append(f" {callsign}")
-        
-        # Style selon sélection
         icao = row['icao24']
-        if selected_icao and icao == selected_icao:
+        is_selected = (selected_icao == icao)
+        
+        # Filtrage des étiquettes pour éviter le chevauchement (clutter)
+        # On affiche l'étiquette uniquement si l'avion est sélectionné OU s'il est en vol actif (> 1200m)
+        on_ground = bool(row.get('on_ground', False))
+        alt_baro = row.get('baro_altitude', 0)
+        alt_val = 0 if pd.isna(alt_baro) else float(alt_baro)
+        
+        if is_selected:
+            text_labels.append(f" <b>{callsign}</b>")
+        elif not on_ground and alt_val > 1200:
+            text_labels.append(f" {callsign}")
+        else:
+            text_labels.append("")  # Masquer le texte pour éviter le fouillis
+            
+        # Style selon sélection
+        if is_selected:
             marker_colors.append(RADAR_YELLOW)
             marker_sizes.append(15)
         else:
