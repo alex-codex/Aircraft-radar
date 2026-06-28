@@ -95,29 +95,22 @@ def register_callbacks(app: dash.Dash) -> None:
             
         return current_selected
 
-    # 5. Rendu dynamique du conteneur Viewport (2D ou 3D)
+    # 5. Contrôle de la visibilité des vues (2D ou 3D)
     @app.callback(
-        Output('radar-viewport-container', 'children'),
+        [Output('radar-2d-container', 'style'),
+         Output('radar-3d-container', 'style')],
         [Input('current-view-store', 'data')]
     )
-    def render_viewport(current_view: str) -> html.Div:
+    def toggle_viewport_visibility(current_view: str) -> Tuple[Dict[str, str], Dict[str, str]]:
         if current_view == "2D":
-            return html.Div([
-                html.Div(className="radar-sweep-effect"),
-                html.Div(className="radar-grid-decors"),
-                html.Div(className="radar-crosshair-h"),
-                html.Div(className="radar-crosshair-v"),
-                dcc.Graph(
-                    id='radar-graph',
-                    className='radar-plotly-graph',
-                    config={'displayModeBar': False, 'scrollZoom': False}
-                )
-            ], style={'position': 'relative', 'width': '100%', 'height': '100%', 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'})
+            return (
+                {'position': 'relative', 'width': '100%', 'height': '100%', 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'},
+                {'display': 'none'}
+            )
         else:
-            return dcc.Graph(
-                id='graph-3d',
-                className='three-d-plotly-graph',
-                config={'displayModeBar': True}
+            return (
+                {'display': 'none'},
+                {'width': '100%', 'height': '100%', 'display': 'block'}
             )
 
     # 6. Rendu centralisé des éléments filtrés et KPIs

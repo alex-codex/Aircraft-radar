@@ -145,8 +145,30 @@ app.layout = html.Div([
                 dcc.Store(id="current-view-store", data="2D")
             ], className="view-selector-container"),
             
-            # Zone d'affichage du radar
-            html.Div(id="radar-viewport-container", className="radar-viewport")
+            # Zone d'affichage du radar (contient les deux vues, masquées/affichées via CSS)
+            html.Div([
+                # Conteneur 2D
+                html.Div([
+                    html.Div(className="radar-sweep-effect"),
+                    html.Div(className="radar-grid-decors"),
+                    html.Div(className="radar-crosshair-h"),
+                    html.Div(className="radar-crosshair-v"),
+                    dcc.Graph(
+                        id='radar-graph',
+                        className='radar-plotly-graph',
+                        config={'displayModeBar': False, 'scrollZoom': False}
+                    )
+                ], id="radar-2d-container", style={'position': 'relative', 'width': '100%', 'height': '100%', 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}),
+                
+                # Conteneur 3D
+                html.Div([
+                    dcc.Graph(
+                        id='graph-3d',
+                        className='three-d-plotly-graph',
+                        config={'displayModeBar': True}
+                    )
+                ], id="radar-3d-container", style={'width': '100%', 'height': '100%', 'display': 'none'})
+            ], id="radar-viewport-container", className="radar-viewport")
             
         ], className="glass-panel center-panel"),
         
