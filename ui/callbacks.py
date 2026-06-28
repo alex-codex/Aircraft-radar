@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import dash
 from dash import dcc, html, Input, Output, State, ALL
+import plotly.graph_objects as go
 from typing import Tuple, Dict, Any, List, Optional
 
 import config.settings as settings
