@@ -82,55 +82,27 @@ input, select, textarea, button, .rc-slider-tooltip-inner {
 
 /* Personnalisation Ultra-Robuste du Dropdown Dash (React-Select) */
 .dash-dropdown,
-.dash-dropdown *,
-.Select,
-.Select * {
+.dash-dropdown * {
   box-sizing: border-box;
 }
 
-.dash-dropdown .Select-control {
-  background-color: rgba(3, 10, 20, 0.75) !important;
-  border: 1px solid rgba(0, 242, 254, 0.25) !important;
+/* Règle universelle pour tous les div/span internes du dropdown (élimine le blanc définitivement) */
+.dash-dropdown div,
+.dash-dropdown span,
+.dash-dropdown div *,
+.dash-dropdown span * {
+  background-color: rgba(3, 10, 20, 0.8) !important;
   color: var(--accent-cyan) !important;
-  border-radius: 6px !important;
+  border-color: rgba(0, 242, 254, 0.22) !important;
   font-family: var(--font-mono) !important;
-  height: 36px !important;
 }
 
-.dash-dropdown .Select-value,
-.dash-dropdown .Select-value-label {
-  color: var(--accent-cyan) !important;
-  text-shadow: var(--text-glow) !important;
-  line-height: 34px !important;
-  background: transparent !important;
-}
-
-.dash-dropdown .Select-placeholder {
-  line-height: 34px !important;
-  color: var(--text-secondary) !important;
-}
-
-.dash-dropdown .Select-menu-outer {
-  background-color: rgba(4, 10, 22, 0.96) !important;
-  border: 1px solid var(--panel-border-active) !important;
-  border-radius: 6px !important;
-  backdrop-filter: blur(12px) !important;
-  z-index: 1000 !important;
-  box-shadow: var(--glow-cyan) !important;
-}
-
-.dash-dropdown .Select-option {
-  background-color: transparent !important;
+/* Style lors du survol d'une option */
+.dash-dropdown div[class*="option"]:hover,
+.dash-dropdown div[class*="option"][class*="focused"],
+.dash-dropdown div[class*="option"][class*="focus"] {
+  background-color: rgba(0, 242, 254, 0.18) !important;
   color: var(--text-primary) !important;
-  font-family: var(--font-mono) !important;
-  padding: 8px 12px !important;
-  transition: all 0.2s ease !important;
-}
-
-.dash-dropdown .Select-option.is-focused,
-.dash-dropdown .Select-option:hover {
-  background-color: rgba(0, 242, 254, 0.15) !important;
-  color: var(--accent-cyan) !important;
 }
 
 .dash-dropdown .Select-arrow {
