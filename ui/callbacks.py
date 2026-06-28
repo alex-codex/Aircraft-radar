@@ -165,7 +165,7 @@ def register_callbacks(app: dash.Dash) -> None:
                 selected_row = matches.iloc[0]
                 
         # 4. Rendu des composants visuels
-        fig_radar = render_polar_radar(df_filtered, max_range, selected_icao)
+        fig_radar = render_polar_radar(df_filtered, max_range, selected_icao, global_history)
         fig_3d = render_3d_airspace(df_filtered, max_range, selected_icao) if current_view == "3D" else go.Figure()
         flight_list_elements = render_flight_list(df_filtered, selected_icao)
         telemetry_element = render_telemetry_panel(selected_row)

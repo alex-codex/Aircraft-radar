@@ -39,6 +39,12 @@ def render_telemetry_panel(selected_row: Optional[pd.Series]) -> html.Div:
     status_color = '#ff3333' if is_ground else '#39ff14'
     
     return html.Div([
+        # Indicateur de verrouillage de cible
+        html.Div([
+            html.Div(className="lock-dot"),
+            html.Span("TARGET LOCKED", className="lock-text")
+        ], className="target-lock-indicator"),
+        
         _render_telemetry_row("INDICATIF :", f"✈️ {selected_row.get('callsign', 'UNKNOWN')}", value_class="highlight", value_style={'fontSize': '14px'}),
         _render_telemetry_row("ADRESSE ICAO :", str(selected_row.get('icao24', 'N/A')).upper()),
         _render_telemetry_row("PAYS D'ORIGINE :", str(selected_row.get('origin_country', 'INCONNU'))),
@@ -71,9 +77,18 @@ def render_flight_list(df: pd.DataFrame, selected_icao: Optional[str]) -> Union[
         icao = str(row['icao24'])
         callsign = str(row['callsign']).strip()
         
-        # Style de sélection
+        # Style de sélection et couleur de bordure selon l'altitude
         is_selected = (selected_icao == icao)
-        card_class = "flight-card selected" if is_selected else "flight-card"
+        
+        alt = row.get('baro_altitude')
+        if pd.isna(alt) or alt < 3000:
+            alt_class = "border-low"
+        elif alt < 10000:
+            alt_class = "border-mid"
+        else:
+            alt_class = "border-high"
+            
+        card_class = f"flight-card {alt_class} selected" if is_selected else f"flight-card {alt_class}"
         
         # Flèche verticale
         v_rate = row.get('vertical_rate', 0)

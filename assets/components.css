@@ -59,37 +59,50 @@
   display: block;
 }
 
+/* Forcer le style sombre sur TOUS les inputs, selects et boutons natifs (supprime le blanc) */
+input, select, textarea, button, .rc-slider-tooltip-inner {
+  background-color: rgba(3, 10, 20, 0.75) !important;
+  color: var(--accent-cyan) !important;
+  border: 1px solid rgba(0, 242, 254, 0.25) !important;
+  border-radius: 6px !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  transition: all 0.3s ease;
+}
+
 .dash-input {
   width: 100%;
-  background: rgba(3, 7, 18, 0.6);
-  border: 1px solid rgba(0, 242, 254, 0.2);
   padding: 8px 12px;
-  border-radius: 6px;
-  color: var(--text-primary);
-  font-family: 'Share Tech Mono', monospace;
-  transition: all 0.3s;
 }
 
 .dash-input:focus {
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 8px rgba(0, 242, 254, 0.3);
+  border-color: var(--accent-cyan) !important;
+  box-shadow: 0 0 8px rgba(0, 242, 254, 0.3) !important;
   outline: none;
 }
 
-/* Personnalisation Complète du Dropdown Dash */
+/* Personnalisation Ultra-Robuste du Dropdown Dash (React-Select) */
+.dash-dropdown,
+.dash-dropdown *,
+.Select,
+.Select * {
+  box-sizing: border-box;
+}
+
 .dash-dropdown .Select-control {
-  background-color: rgba(3, 7, 18, 0.65) !important;
-  border: 1px solid rgba(0, 242, 254, 0.22) !important;
-  color: var(--text-primary) !important;
+  background-color: rgba(3, 10, 20, 0.75) !important;
+  border: 1px solid rgba(0, 242, 254, 0.25) !important;
+  color: var(--accent-cyan) !important;
   border-radius: 6px !important;
   font-family: 'Share Tech Mono', monospace !important;
   height: 36px !important;
 }
 
+.dash-dropdown .Select-value,
 .dash-dropdown .Select-value-label {
   color: var(--accent-cyan) !important;
   text-shadow: var(--text-glow) !important;
   line-height: 34px !important;
+  background: transparent !important;
 }
 
 .dash-dropdown .Select-placeholder {
@@ -98,7 +111,7 @@
 }
 
 .dash-dropdown .Select-menu-outer {
-  background-color: rgba(4, 10, 20, 0.95) !important;
+  background-color: rgba(4, 10, 22, 0.96) !important;
   border: 1px solid var(--panel-border-active) !important;
   border-radius: 6px !important;
   backdrop-filter: blur(12px) !important;
@@ -116,7 +129,7 @@
 
 .dash-dropdown .Select-option.is-focused,
 .dash-dropdown .Select-option:hover {
-  background-color: rgba(0, 242, 254, 0.12) !important;
+  background-color: rgba(0, 242, 254, 0.15) !important;
   color: var(--accent-cyan) !important;
 }
 
@@ -191,7 +204,7 @@
 .telemetry-value.descend { color: var(--accent-red); }
 .telemetry-value.level { color: var(--text-secondary); }
 
-/* --- Radar Viewport & Sweep --- */
+/* --- Radar Viewport & Sweep (Agrandissement à 800px) --- */
 .center-panel { display: flex; flex-direction: column; position: relative; }
 .view-selector-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 10px; z-index: 20; }
 .radar-viewport { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
@@ -223,8 +236,8 @@
 
 .radar-sweep-effect {
   position: absolute;
-  width: 600px;
-  height: 600px;
+  width: 800px;
+  height: 800px;
   border-radius: 50%;
   pointer-events: none;
   z-index: 2;
@@ -240,8 +253,8 @@
 
 .radar-grid-decors {
   position: absolute;
-  width: 600px;
-  height: 600px;
+  width: 800px;
+  height: 800px;
   border-radius: 50%;
   border: 1px solid rgba(0, 242, 254, 0.08);
   pointer-events: none;
@@ -254,8 +267,8 @@
 .radar-grid-decors::before {
   content: "";
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: 533px;
+  height: 533px;
   border-radius: 50%;
   border: 1px dashed rgba(0, 242, 254, 0.06);
 }
@@ -263,15 +276,15 @@
 .radar-grid-decors::after {
   content: "";
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 266px;
+  height: 266px;
   border-radius: 50%;
   border: 1px solid rgba(0, 242, 254, 0.06);
 }
 
 .radar-crosshair-h {
   position: absolute;
-  width: 620px;
+  width: 820px;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.08), transparent);
   pointer-events: none;
@@ -281,13 +294,13 @@
 .radar-crosshair-v {
   position: absolute;
   width: 1px;
-  height: 620px;
+  height: 820px;
   background: linear-gradient(0deg, transparent, rgba(0, 242, 254, 0.08), transparent);
   pointer-events: none;
   z-index: 1;
 }
 
-.radar-plotly-graph { width: 100%; height: 100%; max-width: 650px; max-height: 650px; z-index: 5; }
+.radar-plotly-graph { width: 100%; height: 100%; max-width: 800px; max-height: 800px; z-index: 5; }
 .three-d-plotly-graph { width: 100%; height: 100%; z-index: 5; }
 
 /* --- Cartes des Vols (Target Directory) --- */

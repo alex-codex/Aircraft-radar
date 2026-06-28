@@ -8,7 +8,12 @@ import plotly.graph_objects as go
 from typing import Optional, List
 
 
-def render_polar_radar(df: pd.DataFrame, max_range: float, selected_icao: Optional[str]) -> go.Figure:
+def render_polar_radar(
+    df: pd.DataFrame, 
+    max_range: float, 
+    selected_icao: Optional[str],
+    history_df: pd.DataFrame = pd.DataFrame()
+) -> go.Figure:
     """
     Génère la figure du radar polaire 2D.
     
@@ -16,6 +21,7 @@ def render_polar_radar(df: pd.DataFrame, max_range: float, selected_icao: Option
         df: DataFrame contenant les vols à afficher.
         max_range: Portée maximale du radar (km).
         selected_icao: ICAO24 de l'avion sélectionné (cible active).
+        history_df: DataFrame global d'historique pour tracer les trajectoires.
     """
     RADAR_GREEN = '#39ff14'
     RADAR_CYAN = '#00f2fe'
@@ -67,6 +73,39 @@ def render_polar_radar(df: pd.DataFrame, max_range: float, selected_icao: Option
         )
         
     fig = go.Figure()
+    
+    # 3. Traçage de la traînée de trajectoire pour l'avion sélectionné
+    if selected_icao and not history_df.empty and 'icao24' in history_df.columns:
+        df_hist = history_df[history_df['icao24'] == selected_icao].sort_values('update_time')
+        # On ne garde que les points dans la portée actuelle du radar
+        df_hist = df_hist[df_hist['distance_km'] <= max_range]
+        if not df_hist.empty:
+            fig.add_trace(go.Scatterpolar(
+                r=df_hist['distance_km'].tolist(),
+                theta=df_hist['azimuth'].tolist(),
+                mode='lines',
+                line=dict(color=RADAR_YELLOW, width=2, dash='dot'),
+                opacity=0.6,
+                hoverinfo='skip',
+                name='Trajectoire'
+            ))
+            
+    # 4. Traçage des halos de détection (cercles transparents sous les marqueurs)
+    fig.add_trace(go.Scatterpolar(
+        r=r_coords,
+        theta=theta_coords,
+        mode='markers',
+        customdata=custom_data_list,
+        marker=dict(
+            size=[s * 2.5 for s in marker_sizes],
+            color=marker_colors,
+            opacity=0.15,
+            symbol='circle'
+        ),
+        hoverinfo='skip'
+    ))
+    
+    # 5. Traçage des marqueurs principaux (triangles)
     fig.add_trace(go.Scatterpolar(
         r=r_coords,
         theta=theta_coords,
