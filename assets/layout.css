@@ -1,0 +1,124 @@
+/* ==========================================
+   2. GRID LAYOUT, EN-TÊTE & PANNEAUX VITRÉS
+   ========================================== */
+
+.app-container {
+  display: grid;
+  grid-template-columns: 340px 1fr 360px;
+  grid-template-rows: 65px 1fr;
+  height: 100vh;
+  width: 100vw;
+  padding: 12px;
+  gap: 12px;
+  position: relative;
+  z-index: 10;
+}
+
+/* --- Header --- */
+.app-header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(6, 15, 30, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 0 20px;
+  box-shadow: var(--glow-cyan);
+}
+
+.header-title-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-title-section h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: var(--accent-cyan);
+  text-shadow: var(--text-glow);
+}
+
+.header-subtitle {
+  font-size: 13px;
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--text-secondary);
+  border-left: 2px solid var(--panel-border);
+  padding-left: 15px;
+}
+
+.header-status-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(57, 255, 20, 0.08);
+  border: 1px solid var(--accent-green);
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: var(--accent-green);
+  box-shadow: var(--glow-green);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-green);
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+}
+
+.header-clock {
+  color: var(--accent-cyan);
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: var(--text-glow);
+}
+
+/* --- Panneaux Communs (Glassmorphic) --- */
+.glass-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--glow-cyan);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: var(--panel-border-active);
+  box-shadow: 0 0 18px rgba(0, 242, 254, 0.15);
+}
+
+.panel-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--accent-cyan);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+  padding-bottom: 8px;
+  text-transform: uppercase;
+  text-shadow: var(--text-glow);
+}

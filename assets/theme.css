@@ -1,0 +1,89 @@
+/* ==========================================
+   1. THEME, VARIABLES & ANIMATIONS GLOBALES
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700&display=swap');
+
+:root {
+  --bg-color: #030712;
+  --panel-bg: rgba(6, 15, 30, 0.75);
+  --panel-border: rgba(0, 242, 254, 0.18);
+  --panel-border-active: rgba(0, 242, 254, 0.45);
+  
+  /* Accents */
+  --accent-cyan: #00f2fe;
+  --accent-green: #39ff14;
+  --accent-red: #ff3333;
+  --accent-yellow: #ffb000;
+  --accent-purple: #bf5af2;
+  
+  /* Textes */
+  --text-primary: #e2e8f0;
+  --text-secondary: #64748b;
+  --text-dim: #475569;
+  
+  /* Lueurs (Glow) */
+  --text-glow: 0 0 8px rgba(0, 242, 254, 0.55);
+  --glow-cyan: 0 0 12px rgba(0, 242, 254, 0.22);
+  --glow-green: 0 0 10px rgba(57, 255, 20, 0.25);
+  --glow-yellow: 0 0 10px rgba(255, 176, 0, 0.3);
+}
+
+/* --- Base --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Rajdhani', sans-serif;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Grille de fond technologique (subtile) */
+.grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 242, 254, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 254, 0.015) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grid-background::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at center, transparent 30%, rgba(3, 7, 18, 0.85) 100%);
+  pointer-events: none;
+}
+
+/* --- Animations --- */
+@keyframes blink {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+@keyframes radar-sweep-anim {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glowing {
+  0% { box-shadow: 0 0 5px rgba(0, 242, 254, 0.2); }
+  50% { box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
+  100% { box-shadow: 0 0 5px rgba(0, 242, 254, 0.2); }
+}
