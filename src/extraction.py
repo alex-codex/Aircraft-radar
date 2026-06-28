@@ -1,28 +1,27 @@
 """
-Module d'EXTRACTION - Récupération des données depuis OpenSky API
-Part du pipeline ETL
+Module d'EXTRACTION - Récupération des données depuis OpenSky API.
+Partie "E" du pipeline ETL.
 """
 
 import logging
-from typing import Optional, Tuple
+from typing import Optional
 import pandas as pd
 from opensky_api import OpenSkyApi, TokenManager
-import os
-from dotenv import load_dotenv
-
-
-load_dotenv()
+import config.settings as settings
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
 
 
 class OpenSkyExtractor:
-    def __init__(self):
-        """Initialise avec TokenManager"""
+    """Extracteur de données depuis l'API OpenSky."""
+    
+    api: OpenSkyApi
+
+    def __init__(self) -> None:
+        """Initialise la connexion avec TokenManager ou en mode anonyme."""
         try:
-            client_id = os.getenv("OPENSKY_CLIENT_ID")
-            client_secret = os.getenv("OPENSKY_CLIENT_SECRET")
+            client_id: str = settings.OPENSKY_CLIENT_ID
+            client_secret: str = settings.OPENSKY_CLIENT_SECRET
             
             if client_id and client_secret:
                 token_manager = TokenManager(
@@ -30,14 +29,14 @@ class OpenSkyExtractor:
                     client_secret=client_secret
                 )
                 self.api = OpenSkyApi(token_manager=token_manager)
-                logger.info("Connecté avec TokenManager")
+                logger.info("Connecté avec TokenManager à OpenSky")
             else:
                 # Mode anonyme
                 self.api = OpenSkyApi()
-                logger.info("Connecté-anonyme")
+                logger.info("Connecté en mode anonyme à OpenSky")
         
         except Exception as e:
-            logger.error(f" Erreur: {e}")
+            logger.error(f"Erreur d'initialisation de l'API OpenSky : {e}")
             raise
     
     def get_flights_in_bounding_box(
@@ -49,7 +48,7 @@ class OpenSkyExtractor:
         time_secs: int = 0
     ) -> pd.DataFrame:
         """
-        Récupère les vecteurs d'état des avions dans une zone géographique
+        Récupère les vecteurs d'état des avions dans une zone géographique.
         
         Args:
             lat_min: Latitude minimale
@@ -61,8 +60,6 @@ class OpenSkyExtractor:
         Returns:
             DataFrame Pandas contenant les données des vecteurs d'état
         """
-        
-    
         bbox_tuple = (lat_min, lat_max, lon_min, lon_max)
         
         try:
@@ -76,18 +73,23 @@ class OpenSkyExtractor:
                 return pd.DataFrame()
             
             raw_data = [state.__dict__ for state in states.states]
-            
             df = pd.DataFrame(raw_data)
             return df
             
         except ValueError as ve:
-            logger.error(f" Erreur de validation des coordonnées géographiques: {ve}")
+            logger.error(f"Erreur de validation des coordonnées géographiques: {ve}")
             return pd.DataFrame()
         except Exception as e:
-            logger.error(f" Erreur lors de la récupération des données: {e}")
+            logger.error(f"Erreur lors de la récupération des données OpenSky: {e}")
             return pd.DataFrame()
 
-    def close(self):
+    def close(self) -> None:
+        """Ferme proprement la session OpenSky."""
         if hasattr(self, 'api'):
-            self.api.close()
-            logger.info(" Session OpenSky fermée.")
+            try:
+                self.api.close()
+                logger.info("Session OpenSky fermée.")
+            except Exception as e:
+                logger.error(f"Erreur lors de la fermeture de la session API : {e}")
+                
+        # Nettoyage si necessaire
