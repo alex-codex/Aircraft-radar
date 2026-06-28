@@ -6,48 +6,59 @@ L'interface est optimisée pour être utilisée comme **fond d'écran interactif
 
 ---
 
-## 🎨 Nouveautés de la Version Actuelle (Refonte Premium HUD)
+## 🎨 Fonctionnalités Visuelles & Ergonomiques (HUD Premium)
 
-Par rapport à la version d'origine, l'application a subi une refonte visuelle et fonctionnelle majeure :
+L'application intègre des fonctionnalités visuelles et ergonomiques de haut niveau, inspirées des véritables radars de contrôle aérien (ATC) :
 
-1.  **Esthétique Scientifique/Militaire (HUD)** :
+1.  **Esthétique Militaire & Rétroéclairée** :
     *   Thème sombre abyssal avec une grille géométrique en arrière-plan et un effet de balayage CRT discret.
-    *   Panneaux d'information en verre dépoli (**glassmorphism**) avec des bordures lumineuses cyan néon.
-    *   Polices typographiques technologiques : `Orbitron` pour les titres et `Share Tech Mono` pour les données numériques.
-2.  **Animation de Sonar Actif** : Un effet de balayage radar rotatif en pur CSS tourne en continu sous les marqueurs des avions, simulant un véritable sonar militaire.
-3.  **Interactivité Avancée & Télémétrie** :
-    *   **Sélection de cible** : Cliquer sur un avion sur le radar ou sur sa fiche dans la liste de droite l'engage comme "cible active". Son marqueur s'illumine en jaune et sa fiche technique complète s'affiche dans le panneau de télémétrie (vitesse en km/h et nœuds, taux vertical précis, azimut, coordonnées, statut).
-    *   **Indicateurs de tendance** : La liste de droite affiche des flèches de tendance verticale (↗ en montée, ↘ en descente, → en palier) calculées en temps réel.
-4.  **Optimisation de l'API & Performance** :
-    *   L'API OpenSky est requêtée dans un rayon fixe maximal de 100 km.
-    *   Les filtres de **portée** (curseur de 5 à 100 km), d'**altitude**, et de **recherche par indicatif** filtrent le jeu de données localement dans le navigateur. Cela élimine les requêtes API répétitives et évite d'épuiser les quotas (rate limiting).
-5.  **Double Vue Tactique** : Basculement instantané entre le **Radar Polaire 2D** et le **Dôme Aérien 3D** rotatif.
+    *   Panneaux d'information en verre dépoli (**glassmorphism**) avec des bordures lumineuses en cyan néon.
+    *   Polices typographiques modernes et ultra-lisibles : `Outfit` pour les titres et `JetBrains Mono` pour les coordonnées et données numériques.
+2.  **Animation de Sonar Actif** : Un effet de balayage radar rotatif en pur CSS tourne en continu sous les marqueurs des avions, simulant un véritable sonar.
+3.  **Système Anti-Encombrement (Anti-Cluttering)** :
+    *   Les étiquettes de texte (indicatifs de vols) des avions au sol ou à très basse altitude (< 1 200 m) sont masquées par défaut pour éviter que les étiquettes ne se chevauchent près des aéroports.
+    *   Leurs marqueurs physiques (les blips verts) restent visibles et cliquables.
+    *   Les étiquettes des vols en altitude active (> 1 200 m) s'affichent normalement.
+4.  **Code Couleur d'Altitude (Liaison Visuelle)** :
+    *   Les fiches de vols dans la liste de droite disposent d'une bordure gauche colorée selon leur altitude, correspondant exactement à la couleur de leur blip sur le radar :
+        *   🟢 **Vert** : Basse altitude (< 3 000 m, proche du sol/aéroport).
+        *   🔵 **Bleu cyan** : Moyenne altitude (3 000 - 10 000 m).
+        *   🟣 **Violet** : Haute altitude (> 10 000 m).
+5.  **Verrouillage de Cible (Target Lock) & Traînée Historique** :
+    *   Cliquer sur un avion (sur le radar ou dans la liste) l'engage comme "cible active". Son marqueur s'illumine en jaune et grandit.
+    *   Un badge clignotant jaune **`[ 🟡 TARGET LOCKED ]`** apparaît dans le panneau de télémétrie.
+    *   **Sa trajectoire passée** (historique des positions de l'heure précédente) est dessinée en temps réel sous forme de ligne pointillée jaune.
 
 ---
 
 ## 📂 Architecture Modulaire du Projet
 
-Afin de garantir l'évolutivité du code et de faciliter une future migration vers un frontend **React + Tailwind** et un backend **FastAPI**, le projet a été entièrement restructuré selon les meilleures pratiques industrielles :
+Conformément aux exigences de production, le code est découpé par responsabilité afin de faciliter une future migration vers un frontend **React + Tailwind** et un backend **FastAPI** :
 
 ```
 radar-interactive-dashboard-ui/
-├── assets/
-│   └── style.css            # Styles CSS premium et animations du HUD
+├── assets/                  # Feuilles de style (Dash les charge automatiquement)
+│   ├── theme.css            # Variables de couleurs, polices et animations globales
+│   ├── layout.css           # Grille principale (Grid) et panneaux vitrés
+│   └── components.css       # Widgets : KPIs, formulaires, dropdowns, cartes et radar
 ├── config/
-│   └── settings.py          # Configuration centralisée (GPS, API, DB) et chargement du .env
+│   ├── __init__.py
+│   └── settings.py          # Constantes et variables d'environnement (.env)
 ├── src/                     # Logique métier (ETL)
-│   ├── extraction.py        # Extraction depuis l'API OpenSky (Entièrement typé)
-│   ├── transformation.py    # Nettoyage, calculs géométriques et azimut (Entièrement typé)
-│   └── loading.py           # Persistance dans la base de données SQLite (Entièrement typé)
+│   ├── __init__.py
+│   ├── extraction.py        # Récupération API OpenSky (100% typé)
+│   ├── transformation.py    # Nettoyage, calculs de distance 3D et azimuts (100% typé)
+│   └── loading.py           # Persistance SQLite via SQLAlchemy (100% typé)
 ├── ui/                      # Composants graphiques et callbacks Dash
-│   ├── components.py        # Rendu des KPIs, de la télémétrie et des cartes (HTML)
+│   ├── __init__.py
+│   ├── components.py        # Rendu HTML des KPIs, télémétrie et cartes (100% typé)
 │   ├── graphs.py            # Rendu des figures Plotly (Radar polaire 2D & Espace 3D)
-│   └── callbacks.py         # Gestion des interactions, du filtrage et des stores
+│   └── callbacks.py         # Logique d'interaction et de filtrage local (100% typé)
 ├── tests/                   # Suite de tests unitaires
-│   └── test_radar_logic.py  # Validation des calculs d'azimut et des filtres
+│   └── test_radar_logic.py  # Validation des calculs d'azimut et du filtrage
 ├── app.py                   # Point d'entrée principal (Serveur Dash)
 ├── requirements.txt         # Dépendances Python
-├── .env.example             # Fichier d'exemple pour les variables d'environnement
+├── .env.example             # Modèle de configuration des secrets
 └── README.md                # Ce guide
 ```
 
@@ -55,16 +66,11 @@ radar-interactive-dashboard-ui/
 
 ## ⚙️ Installation et Démarrage
 
-### Prérequis
-*   Python 3.8 ou supérieur
-*   Un fichier `.env` à la racine (optionnel, voir `.env.example` pour utiliser vos identifiants OpenSky afin d'avoir des limites de requêtes plus élevées).
-
 ### 1. Installation des dépendances
 Installez les bibliothèques requises à l'aide de `pip` :
 ```powershell
 pip install -r requirements.txt
 ```
-*Note : Si la bibliothèque `opensky-api` n'est pas installée, assurez-vous de l'installer depuis son dépôt officiel.*
 
 ### 2. Lancement des tests
 Exécutez les tests unitaires pour valider la logique de calcul :
@@ -81,23 +87,10 @@ Le serveur sera disponible à l'adresse suivante : [http://localhost:8050/](http
 
 ---
 
-## 🖥️ Intégration dans Lively Wallpaper (Bureau Windows)
+## 🖥 Honor de la Quality Gate ([40-quality-gate.mdc](file:///C:/Users/casta/.cursor/rules/40-quality-gate.mdc))
 
-Pour définir ce radar interactif comme fond d'écran animé sous Windows :
-
-1.  Lancez le serveur local (`python app.py`).
-2.  Ouvrez **Lively Wallpaper**.
-3.  Cliquez sur le bouton **Ajouter un fond d'écran** (`+` dans le panneau latéral).
-4.  Dans la zone de saisie d'URL, entrez : `http://localhost:8050/` et cliquez sur la flèche pour valider.
-5.  Une fois chargé, donnez-lui un nom (ex: *Radar Aérien Tactique*) et validez.
-6.  *Optionnel :* Pour interagir avec le radar (cliquer sur les avions, utiliser les filtres) directement depuis votre bureau, faites un clic droit sur l'icône de Lively dans la barre des tâches, allez dans **Actif**, et vérifiez que le contrôle est activé.
-
----
-
-## 🛠️ Critères de Qualité (Quality Gate)
 Le code de ce projet respecte scrupuleusement les exigences suivantes :
-*   **Fichiers courts** : Aucun fichier de code ne dépasse 300 lignes.
-*   **Fonctions modulaires** : Toutes les fonctions font moins de 50 lignes de code, facilitant la relecture et le test.
-*   **Typage strict** : 100% des fonctions possèdent des signatures typées (type hints).
-*   **Aucun secret committé** : Toutes les configurations sensibles sont lues depuis le `.env`.
-*   **Zéro duplication** : Les calculs et rendus sont centralisés et réutilisés.
+*   **Fichiers courts** : Aucun fichier de code ou de style ne dépasse la limite de **300 lignes**.
+*   **Fonctions modulaires** : Toutes les fonctions font moins de **50 lignes** (la génération des graphiques a été scindée en fonctions d'aide spécialisées pour le traitement de données et de mise en page).
+*   **Typage strict** : 100 % des fonctions possèdent des signatures typées (`Type Hints`).
+*   **Zéro valeur magique** : Toutes les constantes sont centralisées dans `config/settings.py`.
