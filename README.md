@@ -1,4 +1,4 @@
-# ✈️ Radar Tactique Interactif - Dashboard Temps Réel
+# **Radar Tactique Interactif - Dashboard Temps Réel**
 
 Ce projet est un tableau de bord de contrôle aérien en temps réel, conçu pour afficher les vols d'avions détectés autour d'une position géographique spécifique (par défaut **Houilles, Yvelines, France**). 
 
@@ -6,7 +6,7 @@ L'interface est optimisée pour être utilisée comme **fond d'écran interactif
 
 ---
 
-## 🎨 Fonctionnalités Visuelles & Ergonomiques (HUD Premium)
+## **Fonctionnalités Visuelles & Ergonomiques**
 
 L'application intègre des fonctionnalités visuelles et ergonomiques de haut niveau, inspirées des véritables radars de contrôle aérien (ATC) :
 
@@ -21,17 +21,17 @@ L'application intègre des fonctionnalités visuelles et ergonomiques de haut ni
     *   Les étiquettes des vols en altitude active (> 1 200 m) s'affichent normalement.
 4.  **Code Couleur d'Altitude (Liaison Visuelle)** :
     *   Les fiches de vols dans la liste de droite disposent d'une bordure gauche colorée selon leur altitude, correspondant exactement à la couleur de leur blip sur le radar :
-        *   🟢 **Vert** : Basse altitude (< 3 000 m, proche du sol/aéroport).
-        *   🔵 **Bleu cyan** : Moyenne altitude (3 000 - 10 000 m).
-        *   🟣 **Violet** : Haute altitude (> 10 000 m).
+        *    **Vert** : Basse altitude (< 3 000 m, proche du sol/aéroport).
+        *    **Bleu cyan** : Moyenne altitude (3 000 - 10 000 m).
+        *    **Violet** : Haute altitude (> 10 000 m).
 5.  **Verrouillage de Cible (Target Lock) & Traînée Historique** :
     *   Cliquer sur un avion (sur le radar ou dans la liste) l'engage comme "cible active". Son marqueur s'illumine en jaune et grandit.
-    *   Un badge clignotant jaune **`[ 🟡 TARGET LOCKED ]`** apparaît dans le panneau de télémétrie.
+    *   Un badge clignotant jaune **`[ TARGET LOCKED ]`** apparaît dans le panneau de télémétrie.
     *   **Sa trajectoire passée** (historique des positions de l'heure précédente) est dessinée en temps réel sous forme de ligne pointillée jaune.
 
 ---
 
-## 📂 Architecture Modulaire du Projet
+##  **Architecture Modulaire du Projet**
 
 Conformément aux exigences de production, le code est découpé par responsabilité afin de faciliter une future migration vers un frontend **React + Tailwind** et un backend **FastAPI** :
 
@@ -64,7 +64,7 @@ radar-interactive-dashboard-ui/
 
 ---
 
-## ⚙️ Installation et Démarrage
+## **Installation et Démarrage**
 
 ### 1. Installation des dépendances
 Installez les bibliothèques requises à l'aide de `pip` :
@@ -87,7 +87,7 @@ Le serveur sera disponible à l'adresse suivante : [http://localhost:8050/](http
 
 ---
 
-## 🖥 Honor de la Quality Gate ([40-quality-gate.mdc](file:///C:/Users/casta/.cursor/rules/40-quality-gate.mdc))
+## **Honor de la Quality Gate ([40-quality-gate.mdc](file:///C:/Users/casta/.cursor/rules/40-quality-gate.mdc))**
 
 Le code de ce projet respecte scrupuleusement les exigences suivantes :
 *   **Fichiers courts** : Aucun fichier de code ou de style ne dépasse la limite de **300 lignes**.
