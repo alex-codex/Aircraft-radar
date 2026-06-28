@@ -36,7 +36,7 @@
 }
 
 .header-title-section h1 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-header);
   font-weight: 700;
   font-size: 20px;
   letter-spacing: 2px;
@@ -46,7 +46,7 @@
 
 .header-subtitle {
   font-size: 13px;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: var(--font-mono);
   color: var(--text-secondary);
   border-left: 2px solid var(--panel-border);
   padding-left: 15px;
@@ -56,7 +56,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 14px;
 }
 
@@ -108,7 +108,7 @@
 }
 
 .panel-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-header);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 1.5px;

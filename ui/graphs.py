@@ -123,7 +123,7 @@ def render_polar_radar(
         textfont=dict(
             size=10,
             color=RADAR_CYAN,
-            family="Share Tech Mono",
+            family="JetBrains Mono",
             weight="bold"
         ),
         hovertext=hover_texts,
@@ -133,7 +133,7 @@ def render_polar_radar(
     fig.update_layout(
         paper_bgcolor=TRANSPARENT,
         plot_bgcolor=TRANSPARENT,
-        font=dict(family="Orbitron, monospace", color=RADAR_CYAN),
+        font=dict(family="Outfit, sans-serif", color=RADAR_CYAN),
         polar=dict(
             bgcolor=TRANSPARENT,
             radialaxis=dict(
@@ -144,7 +144,7 @@ def render_polar_radar(
                 linecolor='rgba(0, 242, 254, 0.2)',
                 range=[0, max_range],
                 ticksuffix=' km',
-                tickfont=dict(color='rgba(0, 242, 254, 0.6)', size=9, family='Share Tech Mono')
+                tickfont=dict(color='rgba(0, 242, 254, 0.6)', size=9, family='JetBrains Mono')
             ),
             angularaxis=dict(
                 rotation=90,
@@ -153,12 +153,12 @@ def render_polar_radar(
                 showline=True,
                 gridcolor='rgba(0, 242, 254, 0.12)',
                 linecolor='rgba(0, 242, 254, 0.2)',
-                tickfont=dict(color='rgba(0, 242, 254, 0.8)', size=11, family='Orbitron')
+                tickfont=dict(color='rgba(0, 242, 254, 0.8)', size=11, family='Outfit')
             )
         ),
         hovermode='closest',
         showlegend=False,
-        margin=dict(t=30, b=30, l=30, r=30)
+        margin=dict(t=15, b=15, l=15, r=15)
     )
     
     return fig
@@ -222,7 +222,7 @@ def render_3d_airspace(df: pd.DataFrame, max_range: float, selected_icao: Option
         ),
         text=df_3d['callsign'].str.strip().to_list(),
         textposition='top center',
-        textfont=dict(color=RADAR_CYAN, size=9, family="Share Tech Mono"),
+        textfont=dict(color=RADAR_CYAN, size=9, family="JetBrains Mono"),
         hovertext=[
             f"<b>{row['callsign']}</b><br>Alt: {row['baro_altitude']:.0f}m<br>Dist: {row['distance_km']:.1f}km"
             for _, row in df_3d.iterrows()
@@ -233,7 +233,7 @@ def render_3d_airspace(df: pd.DataFrame, max_range: float, selected_icao: Option
     fig.update_layout(
         paper_bgcolor=TRANSPARENT,
         plot_bgcolor=TRANSPARENT,
-        font=dict(family="Share Tech Mono, monospace", color=RADAR_CYAN),
+        font=dict(family="JetBrains Mono, monospace", color=RADAR_CYAN),
         scene=dict(
             xaxis=dict(
                 title='OUEST - EST (km)',
@@ -276,7 +276,7 @@ def _render_empty_radar(message: str, text_color: str) -> go.Figure:
     return go.Figure().add_annotation(
         text=message,
         showarrow=False,
-        font=dict(size=14, color=text_color, family="Orbitron")
+        font=dict(size=14, color=text_color, family="Outfit")
     ).update_layout(
         paper_bgcolor=TRANSPARENT,
         plot_bgcolor=TRANSPARENT,

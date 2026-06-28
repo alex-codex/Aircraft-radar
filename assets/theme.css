@@ -2,13 +2,18 @@
    1. THEME, VARIABLES & ANIMATIONS GLOBALES
    ========================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
   --bg-color: #030712;
   --panel-bg: rgba(6, 15, 30, 0.75);
   --panel-border: rgba(0, 242, 254, 0.18);
   --panel-border-active: rgba(0, 242, 254, 0.45);
+  
+  /* Typographie */
+  --font-header: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   
   /* Accents */
   --accent-cyan: #00f2fe;
@@ -39,7 +44,7 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: var(--font-body);
   height: 100vh;
   width: 100vw;
   overflow: hidden;

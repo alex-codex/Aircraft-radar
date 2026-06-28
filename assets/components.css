@@ -29,14 +29,14 @@
   font-size: 11px;
   text-transform: uppercase;
   color: var(--text-secondary);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: var(--font-mono);
 }
 
 .stat-value {
   font-size: 20px;
   font-weight: 700;
   color: var(--accent-cyan);
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-header);
   margin-top: 4px;
 }
 
@@ -54,7 +54,7 @@
   font-size: 12px;
   text-transform: uppercase;
   color: var(--text-secondary);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: var(--font-mono);
   margin-bottom: 8px;
   display: block;
 }
@@ -65,7 +65,7 @@ input, select, textarea, button, .rc-slider-tooltip-inner {
   color: var(--accent-cyan) !important;
   border: 1px solid rgba(0, 242, 254, 0.25) !important;
   border-radius: 6px !important;
-  font-family: 'Share Tech Mono', monospace !important;
+  font-family: var(--font-mono) !important;
   transition: all 0.3s ease;
 }
 
@@ -93,7 +93,7 @@ input, select, textarea, button, .rc-slider-tooltip-inner {
   border: 1px solid rgba(0, 242, 254, 0.25) !important;
   color: var(--accent-cyan) !important;
   border-radius: 6px !important;
-  font-family: 'Share Tech Mono', monospace !important;
+  font-family: var(--font-mono) !important;
   height: 36px !important;
 }
 
@@ -122,7 +122,7 @@ input, select, textarea, button, .rc-slider-tooltip-inner {
 .dash-dropdown .Select-option {
   background-color: transparent !important;
   color: var(--text-primary) !important;
-  font-family: 'Share Tech Mono', monospace !important;
+  font-family: var(--font-mono) !important;
   padding: 8px 12px !important;
   transition: all 0.2s ease !important;
 }
@@ -151,7 +151,7 @@ input, select, textarea, button, .rc-slider-tooltip-inner {
 }
 .rc-slider-mark-text {
   color: var(--text-secondary) !important;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: var(--font-mono) !important;
   font-size: 10px !important;
 }
 
@@ -162,7 +162,7 @@ input, select, textarea, button, .rc-slider-tooltip-inner {
   border: 1px dashed rgba(0, 242, 254, 0.2);
   border-radius: 8px;
   padding: 12px;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: var(--font-mono);
   min-height: 160px;
 }
 
@@ -175,7 +175,7 @@ input, select, textarea, button, .rc-slider-tooltip-inner {
   padding: 4px 8px;
   border-radius: 4px;
   color: var(--accent-yellow);
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-header);
   font-size: 11px;
   font-weight: 700;
   margin-bottom: 10px;
@@ -215,7 +215,7 @@ input, select, textarea, button, .rc-slider-tooltip-inner {
   color: var(--text-secondary);
   padding: 6px 16px;
   border-radius: 20px;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-header);
   font-size: 12px;
   font-weight: bold;
   cursor: pointer;
@@ -348,9 +348,9 @@ input, select, textarea, button, .rc-slider-tooltip-inner {
 }
 
 .flight-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.flight-callsign { font-family: 'Orbitron', sans-serif; font-weight: bold; font-size: 14px; color: var(--accent-cyan); text-shadow: var(--text-glow); }
+.flight-callsign { font-family: var(--font-header); font-weight: bold; font-size: 14px; color: var(--accent-cyan); text-shadow: var(--text-glow); }
 .flight-country { font-size: 10px; color: var(--text-secondary); text-transform: uppercase; max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.flight-card-body { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; font-family: 'Share Tech Mono', monospace; font-size: 11px; }
+.flight-card-body { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; font-family: var(--font-mono); font-size: 11px; }
 
 .flight-metric { display: flex; justify-content: space-between; }
 .metric-label { color: var(--text-secondary); }
