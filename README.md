@@ -1,6 +1,6 @@
 # **Radar Tactique Interactif - Dashboard Temps Réel**
 
-Ce projet est un tableau de bord de contrôle aérien en temps réel, conçu pour afficher les vols d'avions détectés autour d'une position géographique spécifique (par défaut **Houilles, Yvelines, France**). 
+Ce projet est un tableau de bord de contrôle aérien en temps réel, conçu pour afficher les vols d'avions détectés autour d'une position géographique spécifique. 
 
 L'interface est optimisée pour être utilisée comme **fond d'écran interactif** sur le bureau Windows via l'application **Lively Wallpaper**.
 
